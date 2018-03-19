@@ -45,12 +45,22 @@ df_campaign = df_campaign.join(in_state_donors_by_campaign).rename(columns={
 df_campaign['oo_state_donors_count'] = df_campaign['donors'] - df_campaign['in_state_donors_count']
 
 campaign_contribs_by_colorado = df.groupby(['CO_ID', 'person', 'colorado']).ContributionAmount.sum().mean(level=[0, 2]).reset_index(level=1)
+campaign_contribs_total_by_colorado = df.groupby(['CO_ID', 'person', 'colorado']).ContributionAmount.sum().sum(level=[0, 2]).reset_index(level=1)
 
 df_campaign = pd.merge(df_campaign, campaign_contribs_by_colorado[campaign_contribs_by_colorado.colorado], left_index=True, right_index=True).rename(columns={
-    'ContributionAmount': 'in_state_donations_amt'
+    'ContributionAmount': 'in_state_donations_mean'
 })
 
 df_campaign = pd.merge(df_campaign, campaign_contribs_by_colorado[~campaign_contribs_by_colorado.colorado], left_index=True, right_index=True).rename(columns={
+    'ContributionAmount': 'oo_state_donations_mean'
+})
+
+
+df_campaign = pd.merge(df_campaign, campaign_contribs_total_by_colorado[campaign_contribs_total_by_colorado.colorado], left_index=True, right_index=True).rename(columns={
+    'ContributionAmount': 'in_state_donations_amt'
+})
+
+df_campaign = pd.merge(df_campaign, campaign_contribs_total_by_colorado[~campaign_contribs_total_by_colorado.colorado], left_index=True, right_index=True).rename(columns={
     'ContributionAmount': 'oo_state_donations_amt'
 })
 
