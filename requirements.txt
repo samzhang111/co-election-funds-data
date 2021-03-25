@@ -55,7 +55,7 @@ pyquery==1.4.0
 pyspecs==2.2
 python-dateutil==2.2
 pytz==2018.3
-PyYAML==3.11
+PyYAML==5.4
 pyzmq==17.0.0
 qtconsole==4.1.0
 requests==2.18.4
