@@ -41,7 +41,7 @@ notebook==4.0.6
 numpy==1.14.0
 openpyxl==2.2.0b1
 pandas==0.22.0
-paramiko==1.15.2
+paramiko==2.10.1
 passlib==1.6.5
 patch==1.14.2
 path.py==8.1.2
